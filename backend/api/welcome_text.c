@@ -1,10 +1,11 @@
 #include <fcgiapp.h>
+#include "helper_macros.h"
 
 void api_welcome_text_get(FCGX_Request* const request) {
-    FCGX_FPrintF(request->out, "{");
-    FCGX_FPrintF(request->out, "\"path\":\"%s\"", FCGX_GetParam("REQUEST_URI", request->envp));
-    FCGX_FPrintF(request->out, ",\"method\":\"%s\"", FCGX_GetParam("REQUEST_METHOD", request->envp));
-    FCGX_FPrintF(request->out, "}");
+    HTTP_OUT("{");
+    HTTP_OUT("\"path\":\"%s\"", FCGX_GetParam("REQUEST_URI", request->envp));
+    HTTP_OUT(",\"method\":\"%s\"", FCGX_GetParam("REQUEST_METHOD", request->envp));
+    HTTP_OUT("}");
 }
 
 void api_welcome_text_post(FCGX_Request* const request) {
