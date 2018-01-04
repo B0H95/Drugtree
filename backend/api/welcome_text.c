@@ -3,8 +3,7 @@
 
 void api_welcome_text_get(FCGX_Request* const request) {
     HTTP_OUT("{");
-    HTTP_OUT("\"path\":\"%s\"", FCGX_GetParam("REQUEST_URI", request->envp));
-    HTTP_OUT(",\"method\":\"%s\"", FCGX_GetParam("REQUEST_METHOD", request->envp));
+    HTTP_OUT("\"result\":\"Nu kommer vi ha knark i all evighet!\"");
     HTTP_OUT("}");
 }
 

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Now we will have drugs for all eternity!</title>
+        <style>
+            body {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+        </style>
+    </head>
+    <body>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+        <h1>Knarkträdet!</h1>
+        <h2 id="message-of-the-day"></h2>
+        <input type="text" placeholder="Username" />
+        <input type="password" placeholder="Password" />
+        <button>Log in</button>
+        <script>
+            $.get("/api/welcome_text", (data, status) => {
+                $("#message-of-the-day").text(data.result);
+            });
+        </script>
+    </body>
+</html>
