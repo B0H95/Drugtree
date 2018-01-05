@@ -29,7 +29,9 @@ delete_routes = routes.map do |route|
     route[:func] + "_delete"
 end
 
-routes_h = %{#include <fcgiapp.h>
+routes_h = %{#pragma once
+
+#include <fcgiapp.h>
 
 #{(get_routes.map do |route|
     %{void #{route}(FCGX_Request* const request);}

@@ -2,8 +2,12 @@
 #include <fcgiapp.h>
 #include "generated/routes.h"
 #include "helper_macros.h"
+#include "database.h"
 
 int main() {
+    if (!database_init()) {
+        return EXIT_FAILURE;
+    }
     FCGX_Request req;
     FCGX_Request* request = &req;
     FCGX_Init();
@@ -16,5 +20,6 @@ int main() {
         HTTP_OUT("\n\r");
         FCGX_Finish_r(request);
     }
+    database_deinit();
     return EXIT_SUCCESS;
 }

@@ -1,13 +1,14 @@
 CC = gcc
 RUBY = ruby
 INCS = -I./
-CCFLAGS = -Wall -Wextra -pedantic
+LIBDIRS = -L/usr/lib64/mysql
+CCFLAGS = -Wall -Wextra -pedantic -std=c11
 FILES = $(shell find . -name "*.c")
-LIBS = -lfcgi
+LIBS = -lfcgi -lmysqlclient
 NAME = build/drugtreebackend
 
 all: compile
 
 compile :
 	$(RUBY) generate.rb
-	$(CC) $(CCFLAGS) $(FILES) -o $(NAME) $(LIBS) $(INCS) 
+	$(CC) $(CCFLAGS) $(FILES) -o $(NAME) $(LIBS) $(LIBDIRS) $(INCS) 
