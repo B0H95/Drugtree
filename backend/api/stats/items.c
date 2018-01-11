@@ -5,7 +5,7 @@
 
 void api_stats_items_get(FCGX_Request* const request) {
     HTTP_OUT("{");
-    MYSQL_RES* result = database_query("SELECT * FROM items;");
+    MYSQL_RES* result = database_create_query("SELECT * FROM items;");
     if (!result) {
         HTTP_OUT("\"error\": \"Could not select items!\"}");
         return;
@@ -21,10 +21,22 @@ void api_stats_items_get(FCGX_Request* const request) {
         }
     }
     HTTP_OUT("\"\"]}");
+    database_free_result(result);
 }
 
 void api_stats_items_post(FCGX_Request* const request) {
-    (void) request;
+    char input[100];
+    HTTP_OUT("{\"results\": [ ");
+    while (FCGX_GetLine(input, 100, request->in)) {
+        for (char* c = input; *c != '\0'; ++c) {
+            if (*c == '\n') {
+                *c = '\0';
+                break;
+            }
+        }
+        HTTP_OUT("\"%s\",", input);
+    }
+    HTTP_OUT("\"\"]}");
 }
 
 void api_stats_items_put(FCGX_Request* const request) {

@@ -28,7 +28,7 @@ void database_deinit() {
     mysql_close(connection);
 }
 
-MYSQL_RES* database_query(const char* query) {
+MYSQL_RES* database_create_query(const char* query) {
     // TODO: Lock here
     if (mysql_query(connection, query)) {
         return NULL;
